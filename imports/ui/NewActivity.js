@@ -59,6 +59,33 @@ class NewActivity extends Component {
                   size="70"
                 />
                 <br/>
+                <label className="letraBonita">Fecha: </label>
+                <br/>
+                <input
+                  className="letraBonita form-control"
+                  type="date"
+                  ref="dateActivity"
+                  size="70"
+                />
+                <br/>
+                <label className="letraBonita">Hora Inicio: </label>
+                <br/>
+                <input
+                  className="letraBonita form-control"
+                  type="time"
+                  ref="initTimeActivity"
+                  size="70"
+                />
+                <br/>
+                <label className="letraBonita">Hora Fin: </label>
+                <br/>
+                <input
+                  className="letraBonita form-control"
+                  type="time"
+                  ref="finalTimeActivity"
+                  size="70"
+                />
+                <br/>
                 <label className="letraBonita">Capacidad: </label>
                 <br/>
                 <input
@@ -93,72 +120,6 @@ class NewActivity extends Component {
     );
   }
 
-  // render() {
-
-  //   return (
-  //     <div>
-  //       <Navbar/>
-  //       <br/>
-  //       <br/>
-  //       <div id="contenedorNuevaAct" className="container form-container">
-  //         <div className="row">
-  //           <div className="col-7">
-  //             <div className="form-title">
-  //               <h3 className="letraBonita">Crea una nueva actividad: </h3>
-  //             </div>
-  //             <form className="new-question" onSubmit={this.handleSubmit.bind(this)}>
-  //               <label className="letraBonita">Titulo: </label>
-  //               <br/>
-  //               <input
-  //                 className="letraBonita form-control"
-  //                 type="text"
-  //                 ref="titleActivity"
-  //                 placeholder="Titulo de tu actividad"
-  //                 size="70"
-  //               />
-  //               <br/>
-  //               <label className="letraBonita">Lugar: </label>
-  //               <br/>
-  //               <input
-  //                 className="letraBonita form-control"
-  //                 type="text"
-  //                 ref="placeActivity"
-  //                 placeholder="Lugar de la actividad"
-  //                 size="70"
-  //               />
-  //               <br/>
-  //               <label className="letraBonita">Capacidad: </label>
-  //               <br/>
-  //               <input
-  //                 className="form-control"
-  //                 type="number"
-  //                 ref="capacityActivity"
-  //                 placeholder="Capacidad de la actividad"
-  //                 size="30"
-  //               />
-  //               <br/>
-  //               <label className="letraBonita">Precio: </label>
-  //               <br/>
-  //               <input
-  //                 className="form-control"
-  //                 type="number"
-  //                 ref="priceActivity"
-  //                 placeholder="Precio de la actividad"
-  //                 size="30"
-  //               />
-  //               <br/>
-  //               <br/>
-  //               <button type="submit" className="letraBonita btn btn-light btn-form">
-  //                 Publicar
-  //               </button>
-  //             </form>
-  //           </div>
-
-  //         </div>
-  //       </div>      
-  //     </div>
-  //   );
-  //}
 }
 
 export default withTracker(() => {
