@@ -17,13 +17,40 @@ class NewActivity extends Component {
     event.preventDefault();
 
     const title = ReactDOM.findDOMNode(this.refs.titleActivity).value.trim();
+    const place = ReactDOM.findDOMNode(this.refs.placeActivity).value.trim();
+    const date = ReactDOM.findDOMNode(this.refs.dateActivity).value.trim();
+    const initTime = ReactDOM.findDOMNode(this.refs.initTimeActivity).value.trim();
+    const finishTime= ReactDOM.findDOMNode(this.refs.finishTimeActivity).value.trim();
+    const capacity = ReactDOM.findDOMNode(this.refs.capacityActivity).value.trim();
+    const price = ReactDOM.findDOMNode(this.refs.priceActivity).value.trim();
+
+
+    console.log(title);
+    console.log(place);
+    console.log(date);
+    console.log(initTime);
+    console.log(finishTime);
+    console.log(capacity);
+    console.log(price);
 
     Activities.insert({
       title,
+      place,
+      date,
+      initTime,
+      finishTime,
+      capacity,
+      price,
       createdAt: new Date(),
     });
 
     ReactDOM.findDOMNode(this.refs.titleActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.placeActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.dateActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.initTimeActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.finishTimeActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.capacityActivity).value = '';
+    ReactDOM.findDOMNode(this.refs.priceActivity).value = '';
   }
 
   render() {
@@ -82,7 +109,7 @@ class NewActivity extends Component {
                 <input
                   className="letraBonita form-control"
                   type="time"
-                  ref="finalTimeActivity"
+                  ref="finishTimeActivity"
                   size="70"
                 />
                 <br/>
