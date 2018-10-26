@@ -36,6 +36,6 @@ class App extends Component {
 
 export default withTracker(() => {
   return {
-    activities: Activities.find({}).fetch(),
+    activities: Activities.find({}, { sort: { createdAt: -1 } }).fetch(),
   };
 })(App);
