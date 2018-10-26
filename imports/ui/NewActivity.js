@@ -42,6 +42,8 @@ class NewActivity extends Component {
       capacity,
       price,
       createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
     });
 
     ReactDOM.findDOMNode(this.refs.titleActivity).value = '';
@@ -151,6 +153,6 @@ class NewActivity extends Component {
 
 export default withTracker(() => {
   return {
-    activities: Activities.find({}).fetch(),
+    currentUser: Meteor.user(),
   };
 })(NewActivity);

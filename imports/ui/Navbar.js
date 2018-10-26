@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Meteor} from 'meteor/meteor';
 import {Link} from 'react-router-dom';
 
+import AccountsUIWrapper from './AccountsUIWrapper.js';
+
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +20,16 @@ export default class Navbar extends Component {
           Uniandes Ask
         </a>
         <div className="row" id="">
+
+          {!!Meteor.user() ? <div className="col nav-item navbar-tab">
+            <Link className="nav-link hvr-underline-from-center" to="/new">Crear Actividad</Link>
+          </div> : ''}
           <div className="col nav-item navbar-tab">
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear Actividad</Link>
           </div>
+
           <div className="col nav-item navbar-tab">
-            <p>Usuarios</p>
+            <AccountsUIWrapper/>
           </div>
         </div>
       </nav>
