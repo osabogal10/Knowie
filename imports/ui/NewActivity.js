@@ -21,8 +21,8 @@ class NewActivity extends Component {
     const date = ReactDOM.findDOMNode(this.refs.dateActivity).value.trim();
     const initTime = ReactDOM.findDOMNode(this.refs.initTimeActivity).value.trim();
     const finishTime= ReactDOM.findDOMNode(this.refs.finishTimeActivity).value.trim();
-    const capacity = ReactDOM.findDOMNode(this.refs.capacityActivity).value.trim();
-    const price = ReactDOM.findDOMNode(this.refs.priceActivity).value.trim();
+    const capacity = parseInt(ReactDOM.findDOMNode(this.refs.capacityActivity).value.trim(), 10);
+    const price = parseInt(ReactDOM.findDOMNode(this.refs.priceActivity).value.trim(), 10);
 
 
     console.log(title);
@@ -33,18 +33,8 @@ class NewActivity extends Component {
     console.log(capacity);
     console.log(price);
 
-    Activities.insert({
-      title,
-      place,
-      date,
-      initTime,
-      finishTime,
-      capacity,
-      price,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
+
+    Meteor.call('activities.insert', title, place, date, initTime, finishTime, capacity, price);
 
     ReactDOM.findDOMNode(this.refs.titleActivity).value = '';
     ReactDOM.findDOMNode(this.refs.placeActivity).value = '';
@@ -152,6 +142,8 @@ class NewActivity extends Component {
 }
 
 export default withTracker(() => {
+  Meteor.subscribe('activities');
+
   return {
     currentUser: Meteor.user(),
   };
