@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 
 import { Activities } from '../api/activities.js';
  
 
 export default class Activity extends Component {
-  // render() {
-  //   return (
-  //     <li>{this.props.activity.title}</li>
-  //   );
-  // }
 
   deleteThisActivity() {
-    Activities.remove(this.props.activity._id);
+    Meteor.call('activities.remove', this.props.activity._id);
+  }
+
+  participateInActivity() {
+    Meteor.call('activities.participate', this.props.activity._id);
   }
 
   render() {
@@ -30,8 +30,11 @@ export default class Activity extends Component {
         <p>{'Precio: ' + this.props.activity.price}</p>
 
         <br/>
-        <button className="delete" onClick={this.deleteThisActivity.bind(this)}>
-          &times;
+        <button className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
+          Borrar
+        </button>
+        <button className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
+          Participar
         </button>
       </div>
     );
