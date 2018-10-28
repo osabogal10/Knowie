@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import {Link} from 'react-router-dom';
 
 import { Activities } from '../api/activities.js';
  
@@ -17,25 +18,18 @@ export default class Activity extends Component {
   render() {
     return (
       <div className="activityContainer container">
-        <h5>{this.props.activity.title}</h5>
+        <Link to={{
+          pathname: `activity/${this.props.activity._id}`,
+          state: {
+            currentActivity: this.props.activity,
+            currentUser: Meteor.user(),
+          }
+        }}>
+          <h5>{this.props.activity.title}</h5>
+        </Link>
         <br/>
-        <p>{'Lugar: ' + this.props.activity.place}</p>
-
-        <p>{'Fecha: ' + this.props.activity.date}</p>
-
         <p>{'Hora: ' + this.props.activity.initTime + ' - ' + this.props.activity.finishTime}</p>
-
-        <p>{'Capacidad: ' + this.props.activity.capacity}</p>
-      
-        <p>{'Precio: ' + this.props.activity.price}</p>
-
         <br/>
-        <button className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
-          Borrar
-        </button>
-        <button className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
-          Participar
-        </button>
       </div>
     );
 

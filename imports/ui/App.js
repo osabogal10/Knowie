@@ -26,9 +26,9 @@ class App extends Component {
             <h1>Actividades Uniandes</h1>
           </header>
   
-          <ul>
+          <div>
             {this.renderActivities()}
-          </ul>
+          </div>
         </div>
       </div>
     );
