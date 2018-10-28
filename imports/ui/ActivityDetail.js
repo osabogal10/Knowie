@@ -32,7 +32,9 @@ class ActivityDetail extends Component {
     Meteor.call('activities.participate', this.state.currentActivity._id);
   }
 
-  
+  showActivityParticipants() {
+
+  }
 
   render() {
     let currentActivity = this.state.currentActivity;
@@ -64,6 +66,9 @@ class ActivityDetail extends Component {
             </button> : ''
           }
 
+        </div>
+        <div className="participanListContainer">
+          
         </div>
         
       </div>
