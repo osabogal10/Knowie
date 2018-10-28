@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Meteor} from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Activities } from '../api/activities.js';
+import Activity from './Activity.js';
+
 // App component - represents the whole app
 class ListaActivities extends Component {
 
