@@ -17,6 +17,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar sticky-top">
         <a className="letraBonita navbar-brand nav-link hvr-icon-grow" href="/">
+          <img id="imgBrand" className="hvr-icon" src="logo.svg" alt="brand"/>
           Knowie
         </a>
         <div className="row" id="">
