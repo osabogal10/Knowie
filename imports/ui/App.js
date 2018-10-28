@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {Meteor} from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-
-import Activities from '../api/activities.js';
- 
+import { Activities } from '../api/activities.js';
 import Navbar from './Navbar.js';
 import Activity from './Activity.js';
  
