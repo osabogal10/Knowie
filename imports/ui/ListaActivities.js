@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Meteor} from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-
+import { Activities } from '../api/activities.js';
 // App component - represents the whole app
-class Activities extends Component {
+class ListaActivities extends Component {
 
   renderActivities() {
     return this.props.activities.map((activity) => (
@@ -35,4 +35,4 @@ export default withTracker(() => {
     activities: Activities.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user(),
   };
-})(Activities);
+})(ListaActivities);

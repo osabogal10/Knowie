@@ -1,4 +1,84 @@
+/*Diseño Generico*/
 body {
-  padding: 10px;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background: #E5E5E5!important;
+}
+
+/*Navbar*/
+#sign-in{
+  margin-right: 10rem;
+}
+
+.navbar{
+  font-family: 'Dosis', sans-serif;
+  background: #333657;
+  color: white;
+}
+
+.nav-link{
+  color: white;
+}
+
+#container-inicio{
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #6c6c75;
+  text-align: center;
+}
+
+#titulo{
+  width: 100%;
+}
+
+#texto{
+  width: 100%;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#titulo-texto{
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  font-size: 7rem;
+  color: #E5E5E5;
+}
+
+#subtitulo{
+  margin-top: -1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  font-size: 2.4rem;
+  color: #E5E5E5;
+}
+
+#description{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#titulo-description{
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  font-size: 3.5rem;
+  color: #6065A3;
+  margin-bottom: 2rem;
+}
+
+.size-icon{
+  padding-top: 2rem;
+  height: 8rem;
+}
+
+.footer{
+  font-family: 'Dosis', sans-serif;
+  padding-top: 1rem;
+  padding-bottom: 0.1rem;
+  background: #333656;
+  color: white;
+  text-align: center;
 }

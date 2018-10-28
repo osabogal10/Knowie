@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Meteor} from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Activities } from '../api/activities.js';
+import ActivitiesList from './ListaActivities.js';
+import Inicio from './Inicio.js';
 import Navbar from './Navbar.js';
 import Activity from './Activity.js';
  
@@ -19,26 +20,18 @@ class App extends Component {
       <div>
         <Navbar/>
         {!!Meteor.user() ?
-          <div className="container">
-            <header>
-              <h1>Actividades Uniandes</h1>
-            </header>
-
-            <ul>
-              {this.renderActivities()}
-            </ul>
-          </div>:''
+          <ActivitiesList/>:<Inicio/>
         }
+        <div className="footer">
+          <p>Juan Sebastián Millán L - Andrés Felipe Lopez. <br/> All Rights Reserved.</p>
+        </div>
       </div>
     );
   }
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('activities');
-
   return {
-    activities: Activities.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user(),
   };
 })(App);

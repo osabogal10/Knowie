@@ -15,7 +15,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-dark bg-dark sticky-top">
+      <nav className="navbar sticky-top">
         <a className="letraBonita navbar-brand nav-link hvr-icon-grow" href="/">
           Knowie
         </a>
@@ -25,7 +25,7 @@ export default class Navbar extends Component {
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear Actividad</Link>
           </div> : ''}
 
-          <div className="col nav-item navbar-tab">
+          <div className="col nav-item navbar-tab" id="sign-in">
             <AccountsUIWrapper/>
           </div>
         </div>
