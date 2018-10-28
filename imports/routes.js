@@ -7,6 +7,7 @@ import App from './ui/App.js';
 
 
 import NewActivity from './ui/NewActivity.js';
+import ActivityDetail from './ui/ActivityDetail.js';
 
 
 export const AppRoutes = () => (
@@ -14,6 +15,7 @@ export const AppRoutes = () => (
     <div>
       <Route exact path='/' component={App}/>
       <Route exact path='/new' component={NewActivity}/>
+      <Route exact path='/activity/:id' component={ActivityDetail}/>
     </div>
   </Router>
 );
