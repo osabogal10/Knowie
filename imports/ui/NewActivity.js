@@ -15,6 +15,7 @@ class NewActivity extends Component {
 
     this.state = {
       errorMessage: '',
+      finished: false,
     };
   }
 
@@ -91,7 +92,9 @@ class NewActivity extends Component {
       ReactDOM.findDOMNode(this.refs.capacityActivity).value = '';
       ReactDOM.findDOMNode(this.refs.priceActivity).value = '';
 
-      return <Redirect to="/"/>;
+      this.setState({
+        finished: true,
+      });
     }
     
   }
@@ -109,6 +112,25 @@ class NewActivity extends Component {
   }
 
   render() {
+
+    let finished = this.state.finished;
+    if(finished){
+      return (
+        <div>
+          <Navbar/>
+          <br/>
+          <br/>
+
+          <div className="container detail-container">
+            <h3>Actividad Creada Exitosamente</h3>
+            <br/>
+            <br/>
+            <h5><a href="/">Regresar a la lista de actividades.</a></h5>
+          </div>
+
+        </div>
+      );
+    }
 
     return (
       <div>
