@@ -17,12 +17,12 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar sticky-top">
         <a className="letraBonita navbar-brand nav-link hvr-icon-grow" href="/">
-          <img id="imgBrand" className="hvr-icon" src="logo.svg" alt="brand"/>
+          <img id="imgBrand" className="hvr-icon" src="/logo.svg" alt="brand"/>
           Knowie
         </a>
         <div className="row" id="">
 
-          {!!Meteor.user() && Meteor.user().username === 'Deportes' ? <div className="col nav-item navbar-tab">
+          {!!Meteor.user() && (Meteor.user().username === 'Deportes' || Meteor.user().username === 'sebas') ? <div className="col nav-item navbar-tab">
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear Actividad</Link>
           </div> : ''}
 

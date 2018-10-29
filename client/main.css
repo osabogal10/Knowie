@@ -30,6 +30,8 @@ body {
   color: white;
 }
 
+/*Pagina de inicio*/
+
 #container-inicio{
   position: relative;
   max-width: 100%;
@@ -85,6 +87,71 @@ body {
   height: 8rem;
 }
 
+/*Lista actividades*/
+#sinEspacio{
+  padding-left: 0;
+}
+
+#container-organizador{
+  background: #6065A3;
+  color: #E5E5E5;
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: 'Dosis', sans-serif;
+}
+
+.container-organizadores{
+  background: #E5E5E5;
+  color: #333656;
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Dosis', sans-serif;
+  border: solid #6065A3;
+  border-top: 0;
+  cursor: pointer;
+}
+
+#organizador-selected{
+  background: #7E85D6;
+  color: #E5E5E5;
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Dosis', sans-serif;
+  border: solid #6065A3;
+  border-top: 0;
+  cursor: pointer;
+}
+
+#nombre-institucion{
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bolder;
+  color: #6065A3;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#fila-actividades{
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/*Footer*/
 .footer{
   font-family: 'Dosis', sans-serif;
   padding-top: 1rem;

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import * as _ from "meteor/underscore";
  
 export const Activities = new Mongo.Collection('activities');
 
@@ -37,6 +38,16 @@ Meteor.methods({
       participants: [],
     });
 
+  },
+  'activities.organizadores'() {
+    const organizadores = Activities.find({}, {sort:{username:1},fields:{username:true, _id:false}});
+    var result = [];
+      organizadores.forEach((a,i)=> {
+        if (!result.indexOf(a.username)>=0) {
+          result[i] = a;
+        }
+      })
+    return result;
   },
   'activities.remove'(activityId){
     check(activityId, String);
