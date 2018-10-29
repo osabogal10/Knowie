@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FullCalendar from 'fullcalendar-reactwrapper';
+import {withTracker} from "meteor/react-meteor-data";
+import {Meteor} from "meteor/meteor";
+import {Activities} from "../api/activities";
 
-export default class ExampleComponent extends React.Component {
+export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +51,11 @@ export default class ExampleComponent extends React.Component {
       ],
     }
   }
+
+  componentWillMount() {
+
+  }
+
 
   render() {
     return (

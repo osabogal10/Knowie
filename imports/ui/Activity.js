@@ -7,13 +7,6 @@ import {Activities} from '../api/activities.js';
 
 export default class Activity extends Component {
 
-  deleteThisActivity() {
-    Meteor.call('activities.remove', this.props.activity._id);
-  }
-
-  participateInActivity() {
-    Meteor.call('activities.participate', this.props.activity._id);
-  }
 
   render() {
     return (
