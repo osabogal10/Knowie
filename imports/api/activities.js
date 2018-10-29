@@ -50,6 +50,9 @@ Meteor.methods({
       $inc: { capacity: -1},
       $push: { participants: Meteor.users.findOne(this.userId).username}
     });
+
+    const answer = Activities.findOne({_id: activityId});
+    return answer;
   },
 
 });
