@@ -3,32 +3,37 @@ import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Activities} from '../api/activities.js';
 import Activity from './Activity.js';
+import Calendar from './Calendar.js';
+import FullCalendar from "fullcalendar-reactwrapper";
+
 
 // App component - represents the whole app
 class ListaActivities extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      organizadores: ["Deportes", "Decanatura","ANDAR","CTP"],
-      filterTags: "Deportes"
+      organizadores: ["Deportes","sebas","Decanatura","ANDAR","CTP"],
+      filterTags: "Deportes",
+      events:[]
     };
   }
 
-  renderActivities() {
+  organizadorFilter(organizador) {
     let filteredActivities = this.props.activities;
     let currentTags = this.state.filterTags;
     filteredActivities = filteredActivities.filter((a) => a.username===currentTags);
-    return filteredActivities.map((activity) => (
-      <Activity key={activity._id} activity={activity}/>
-    ));
-  }
-
-
-  organizadorFilter(organizador) {
+    let events = [];
+    for (let i=0;i<filteredActivities.length;i++)
+    {
+      let actual = filteredActivities[i];
+      let evento = {title:actual.title, start:actual.date + 'T' + actual.initTime,
+        end:actual.date + 'T' +actual.finishTime, url:'activity/'+actual._id};
+      events.push(evento)
+    }
     this.setState({
-      filterTags: organizador
+      filterTags: organizador,
+      events:events
     });
 
   }
@@ -55,9 +60,25 @@ class ListaActivities extends Component {
         </div>
         <div className="col-9">
           <h1 id="nombre-institucion">Actividades Uniandes</h1>
-          <ul>
-            {this.renderActivities()}
-          </ul>
+          <div id="example-component">
+            <FullCalendar
+              id = "1111111"
+              header = {{
+                left: 'prev,next today myCustomButton',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+              }}
+              defaultDate={Date().toString()}
+              navLinks= {true} // can click day/week names to navigate views
+              editable= {true}
+              eventLimit= {true} // allow "more" link when too many events
+              events = {this.state.events}
+            />
+          </div>
+          {/*<Calendar/>*/}
+          {/*<ul>*/}
+            {/*{this.renderActivities()}*/}
+          {/*</ul>*/}
         </div>
       </div>
     );

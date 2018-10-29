@@ -151,6 +151,17 @@ body {
   margin-left: 0;
 }
 
+/*Activity*/
+#activityContainer{
+  background: #333656;
+  margin: 2rem;
+  color: #E5E5E5;
+}
+
+#activityContainer a:hover{
+  color: #E5E5E5;
+}
+
 /*Footer*/
 .footer{
   font-family: 'Dosis', sans-serif;
