@@ -80,6 +80,7 @@ class ActivityDetail extends Component {
   render() {
     let currentActivity = this.state.currentActivity;
     let currentUser = Meteor.user();
+    let participate = false;
     let isParticipant = false;
     if(currentUser === null){
       return <Redirect to="/"/>;
@@ -87,6 +88,12 @@ class ActivityDetail extends Component {
 
     if(currentActivity.participants !== undefined && currentUser !== undefined){
       if(currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0){
+        participate = true;
+      }
+    }
+
+    if(currentActivity.participants !== undefined && currentUser !== undefined){
+      if(currentActivity.participants.includes(currentUser.username)){
         isParticipant = true;
       }
     }
@@ -131,7 +138,7 @@ class ActivityDetail extends Component {
             
           }
           {
-            !isParticipant ? <button id="btnParticipar" className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
+            !participate ? <button id="btnParticipar" className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
               Participar
             </button> : ''
           }
@@ -140,6 +147,13 @@ class ActivityDetail extends Component {
             currentUser !== undefined && currentUser.username === currentActivity.username ? <button id="btnListaParticipantes" className="userlist btn btn-success" onClick={this.showActivityParticipants.bind(this)}>
               Lista Participantes
             </button> : ''
+          }
+
+          {
+            isParticipant ? 
+              <div className="alert alert-primary" role="alert">
+                Ya estás inscrito a esta actividad.
+              </div> : ''
           }
           <br/>
           <br/>
