@@ -172,6 +172,15 @@ body {
   text-align: center;
 }
 
+.fc-unthemed .fc-today{
+  background: #7E85D6;
+}
+
+.fc-event{
+  background: #4D4E56;
+  border: #E5E5E5;
+}
+
 /* Icon Grow */
 .hvr-icon-grow {
   display: inline-block;
