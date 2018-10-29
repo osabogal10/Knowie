@@ -42,11 +42,11 @@ Meteor.methods({
   'activities.organizadores'() {
     const organizadores = Activities.find({}, {sort:{username:1},fields:{username:true, _id:false}});
     var result = [];
-      organizadores.forEach((a,i)=> {
-        if (!result.indexOf(a.username)>=0) {
-          result[i] = a;
-        }
-      })
+    organizadores.forEach((a,i)=> {
+      if (!result.indexOf(a.username)>=0) {
+        result[i] = a;
+      }
+    });
     return result;
   },
   'activities.remove'(activityId){
@@ -65,5 +65,11 @@ Meteor.methods({
     const answer = Activities.findOne({_id: activityId});
     return answer;
   },
+  'activities.findone'(activityId){
+    check(activityId, String);
+
+    const answer = Activities.findOne({_id: activityId});
+    return answer;
+  }
 
 });
