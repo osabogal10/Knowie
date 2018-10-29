@@ -3,6 +3,8 @@ import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Activities} from '../api/activities.js';
 import Activity from './Activity.js';
+import Calendar from './ExampleComponent.js';
+
 
 // App component - represents the whole app
 class ListaActivities extends Component {
@@ -11,7 +13,7 @@ class ListaActivities extends Component {
     super(props);
 
     this.state = {
-      organizadores: ["Deportes", "Decanatura","ANDAR","CTP"],
+      organizadores: ["Deportes","sebas","Decanatura","ANDAR","CTP"],
       filterTags: "Deportes"
     };
   }
@@ -55,9 +57,10 @@ class ListaActivities extends Component {
         </div>
         <div className="col-9">
           <h1 id="nombre-institucion">Actividades Uniandes</h1>
-          <ul>
-            {this.renderActivities()}
-          </ul>
+          <Calendar/>
+          {/*<ul>*/}
+            {/*{this.renderActivities()}*/}
+          {/*</ul>*/}
         </div>
       </div>
     );
