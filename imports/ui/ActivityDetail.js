@@ -3,6 +3,7 @@ import Navbar from './Navbar.js';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Link} from 'react-router-dom';
+import { Redirect} from 'react-router';
 
 class ActivityDetail extends Component {
   constructor(props){
@@ -11,6 +12,7 @@ class ActivityDetail extends Component {
     this.state = {
       currentActivity: {},
       currentUser: {},
+      showParticipants: false,
     };
   }
 
@@ -29,16 +31,44 @@ class ActivityDetail extends Component {
   }
 
   participateInActivity() {
-    Meteor.call('activities.participate', this.state.currentActivity._id);
+    Meteor.call('activities.participate', this.state.currentActivity._id, (err, activity) => {
+      this.setState({
+        currentActivity: activity
+      });
+    });
+
+
   }
 
   showActivityParticipants() {
+    let show = this.state.showParticipants;
+    this.setState({
+      showParticipants: !show,
+    });
+    
+  }
 
+  renderParticipantsList() {
+    return this.state.currentActivity.participants.map((participant, i) => (
+      <li key={i}>{participant}</li>
+    ));
   }
 
   render() {
     let currentActivity = this.state.currentActivity;
     let currentUser = Meteor.user();
+    let isParticipant = false;
+    if(currentUser === null){
+      return <Redirect to="/"/>;
+    }
+    
+    if(currentActivity.participants !== undefined){
+      if(currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0){
+        isParticipant = true;
+      }
+    }
+    
+
     return (
       <div>
         <Navbar/>
@@ -57,19 +87,29 @@ class ActivityDetail extends Component {
               Borrar
             </button> : ''
           }
-          <button className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
-            Participar
-          </button>
           {
-            currentUser.username === currentActivity.owner ? <button className="userlist btn btn-success" onClick={this.deleteThisActivity.bind(this)}>
+            !isParticipant ? <button className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
+              Participar
+            </button> : ''
+          }
+          
+          {
+            currentUser.username === currentActivity.username ? <button className="userlist btn btn-success" onClick={this.showActivityParticipants.bind(this)}>
               Lista Participantes
             </button> : ''
           }
 
         </div>
-        <div className="participanListContainer">
-          
-        </div>
+        {
+          this.state.showParticipants ? 
+            <div className="participanListContainer">
+              <h4>Lista Participantes: </h4>
+              <ul>
+                {this.renderParticipantsList()}
+              </ul>
+            </div> : ''
+        }
+        
         
       </div>
     );
