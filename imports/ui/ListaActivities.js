@@ -41,7 +41,7 @@ class ListaActivities extends Component {
       <p>{a}</p>
     </button>}
     </div>
-    )
+    );
   }
 
   render() {

@@ -13,21 +13,44 @@ class ActivityDetail extends Component {
       currentActivity: {},
       currentUser: {},
       showParticipants: false,
+      deleted: false,
     };
   }
 
   componentDidMount(){
-    const currentActivity = this.props.location.state.currentActivity;
-    const currentUser = this.props.currentUser;
+    // const currentActivity = this.props.location.state.currentActivity;
+    // const currentUser = this.props.currentUser;
 
-    this.setState({
-      currentActivity: currentActivity,
-      currentUser: currentUser,
+    // this.setState({
+    //   currentActivity: currentActivity,
+    //   currentUser: currentUser,
+    // });
+
+    console.log(window.location.href);
+
+    let path = window.location.href;
+    let splitPath = path.split('/');
+
+    const activityId = splitPath[splitPath.length -1];
+    console.log(activityId);
+
+    Meteor.call('activities.findone', activityId, (err, activity) => {
+      this.setState({
+        currentActivity: activity,
+        currentUser: Meteor.user(),
+      });
     });
+
+    
   }
+
 
   deleteThisActivity() {
     Meteor.call('activities.remove', this.state.currentActivity._id);
+
+    this.setState({
+      deleted: true,
+    });
   }
 
   participateInActivity() {
@@ -61,11 +84,30 @@ class ActivityDetail extends Component {
     if(currentUser === null){
       return <Redirect to="/"/>;
     }
-    
-    if(currentActivity.participants !== undefined){
+
+    if(currentActivity.participants !== undefined && currentUser !== undefined){
       if(currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0){
         isParticipant = true;
       }
+    }
+
+    let deleted = this.state.deleted;
+    if (deleted) {
+      return (
+        <div>
+          <Navbar/>
+          <br/>
+
+          <div className="container detail-container">
+            <h3>Actividad Eliminada Exitosamente</h3>
+            <br/>
+            <br/>
+            <h5><a href="/">Regresar a la lista de actividades.</a></h5>
+          </div>
+
+        </div>
+      );
+
     }
     
 
@@ -73,7 +115,7 @@ class ActivityDetail extends Component {
       <div>
         <Navbar/>
         <br/>
-        <div className="container">
+        <div className="container detailContainer col-md-6">
           <h3>{currentActivity.title}</h3>
           <br/>
           <p>{'Lugar: ' + currentActivity.place}</p>
@@ -83,32 +125,38 @@ class ActivityDetail extends Component {
           <p>{'Precio: ' + currentActivity.price}</p>
           <br/>
           {
-            currentUser.username === currentActivity.username ? <button className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
+            currentUser !== undefined && currentUser.username === currentActivity.username ? <button id="btnBorrar" className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
               Borrar
             </button> : ''
+            
           }
           {
-            !isParticipant ? <button className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
+            !isParticipant ? <button id="btnParticipar" className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
               Participar
             </button> : ''
           }
           
           {
-            currentUser.username === currentActivity.username ? <button className="userlist btn btn-success" onClick={this.showActivityParticipants.bind(this)}>
+            currentUser !== undefined && currentUser.username === currentActivity.username ? <button id="btnListaParticipantes" className="userlist btn btn-success" onClick={this.showActivityParticipants.bind(this)}>
               Lista Participantes
             </button> : ''
           }
+          <br/>
+          <br/>
+
+          {
+            this.state.showParticipants ? 
+              <div>
+                <h4>Lista Participantes: </h4>
+                <ul>
+                  {this.renderParticipantsList()}
+                </ul>
+              </div> : ''
+          }
 
         </div>
-        {
-          this.state.showParticipants ? 
-            <div className="participanListContainer">
-              <h4>Lista Participantes: </h4>
-              <ul>
-                {this.renderParticipantsList()}
-              </ul>
-            </div> : ''
-        }
+
+        
         
         
       </div>
