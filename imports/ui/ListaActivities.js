@@ -21,8 +21,7 @@ class ListaActivities extends Component {
 
   organizadorFilter(organizador) {
     let filteredActivities = this.props.activities;
-    let currentTags = this.state.filterTags;
-    filteredActivities = filteredActivities.filter((a) => a.username===currentTags);
+    filteredActivities = filteredActivities.filter((a) => a.username===organizador);
     let events = [];
     for (let i=0;i<filteredActivities.length;i++)
     {
@@ -50,6 +49,16 @@ class ListaActivities extends Component {
   }
 
   render() {
+    let filteredActivities = this.props.activities;
+    filteredActivities = filteredActivities.filter((a) => a.username===this.state.filterTags);
+    const events = [];
+    for (let i=0;i<filteredActivities.length;i++)
+    {
+      let actual = filteredActivities[i];
+      let evento = {title:actual.title, start:actual.date + 'T' + actual.initTime,
+        end:actual.date + 'T' +actual.finishTime, url:'activity/'+actual._id};
+      events.push(evento)
+    }
     return (
       <div className="row" id="fila-actividades">
         <div className="col-3" id="sinEspacio">
@@ -58,11 +67,12 @@ class ListaActivities extends Component {
           </div>
           {this.renderOrganizadores()}
         </div>
-        <div className="col-9">
+        <div className="col-9" id="tamanio">
           <h1 id="nombre-institucion">Actividades Uniandes</h1>
           <div id="example-component">
+            {this.state.events.length===0?
             <FullCalendar
-              id = "1111111"
+              id = "KnowieCalendar"
               header = {{
                 left: 'prev,next today myCustomButton',
                 center: 'title',
@@ -70,15 +80,23 @@ class ListaActivities extends Component {
               }}
               defaultDate={Date().toString()}
               navLinks= {true} // can click day/week names to navigate views
-              editable= {true}
+              editable= {false}
               eventLimit= {true} // allow "more" link when too many events
-              events = {this.state.events}
-            />
+              events = {events}
+            />:<FullCalendar
+                id = "KnowieCalendar"
+                header = {{
+                  left: 'prev,next today myCustomButton',
+                  center: 'title',
+                  right: 'month,basicWeek,basicDay'
+                }}
+                defaultDate={Date().toString()}
+                navLinks= {true} // can click day/week names to navigate views
+                editable= {false}
+                eventLimit= {true} // allow "more" link when too many events
+                events = {this.state.events}
+              />}
           </div>
-          {/*<Calendar/>*/}
-          {/*<ul>*/}
-            {/*{this.renderActivities()}*/}
-          {/*</ul>*/}
         </div>
       </div>
     );
