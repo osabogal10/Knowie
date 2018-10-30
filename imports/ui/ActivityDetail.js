@@ -69,26 +69,7 @@ class ActivityDetail extends Component {
   }
 
   renderTwits(){
-    return <a className="twitter-timeline" data-lang="es" data-width="400" data-height="300" data-theme="light"
-       data-link-color="#7E85D6" href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National
-      Park Tweets - Curated tweets by TwitterDev</a>
-      < a
-    className = "twitter-timeline"
-    data - lang = "es"
-    data - width = "250"
-    data - height = "300"
-    data - link - color = "#981CEB"
-    href = "https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw" > National
-    Park
-    Tweets - Curated
-    tweets
-    by
-    TwitterDev < /a> <script async src="https:/
-    /platform.twitter.com/
-    widgets.js
-    " charSet="
-    utf - 8
-    "></script>
+
   }
 
   render() {

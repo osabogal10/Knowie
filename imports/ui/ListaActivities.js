@@ -13,7 +13,7 @@ class ListaActivities extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      organizadores: ["Deportes","sebas","Decanatura","ANDAR","CTP"],
+      organizadores: ["Deportes","Decanatura","ANDAR","CTP","Uniandinos"],
       filterTags: "Deportes",
       events:[]
     };
