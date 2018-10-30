@@ -64,12 +64,14 @@ class ActivityDetail extends Component {
 
   renderParticipantsList() {
     return this.state.currentActivity.participants.map((participant, i) => (
-      <li key={i}>{participant}</li>
+      <li key={i} className="texto-info list-group-item">{participant}</li>
     ));
   }
 
   renderTwits(){
-
+    return <p className="texto-info">
+      Proximamente API twitter
+    </p>
   }
 
   render() {
@@ -175,22 +177,21 @@ class ActivityDetail extends Component {
               }
               <br/>
               <br/>
-
-              {
-                this.state.showParticipants ?
-                  <div>
-                    <h4>Lista Participantes: </h4>
-                    <ul>
-                      {this.renderParticipantsList()}
-                    </ul>
-                  </div> : ''
-              }
             </div>
             <div className="col-6">
               <p className="label-info" id="twits">Twits</p>
               <div id="container-twits">
                 {this.renderTwits()}
               </div>
+              {
+                this.state.showParticipants ?
+                  <div>
+                    <p className="label-info" id="titulo-participantes">Lista Participantes: </p>
+                    <ul className="list-group">
+                      {this.renderParticipantsList()}
+                    </ul>
+                  </div> : ''
+              }
             </div>
           </div>
         </div>
