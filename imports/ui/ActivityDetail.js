@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Navbar from './Navbar.js';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Link} from 'react-router-dom';
-import { Redirect} from 'react-router';
+import {Redirect} from 'react-router';
 
 class ActivityDetail extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -17,21 +17,12 @@ class ActivityDetail extends Component {
     };
   }
 
-  componentDidMount(){
-    // const currentActivity = this.props.location.state.currentActivity;
-    // const currentUser = this.props.currentUser;
-
-    // this.setState({
-    //   currentActivity: currentActivity,
-    //   currentUser: currentUser,
-    // });
-
-    console.log(window.location.href);
+  componentDidMount() {
 
     let path = window.location.href;
     let splitPath = path.split('/');
 
-    const activityId = splitPath[splitPath.length -1];
+    const activityId = splitPath[splitPath.length - 1];
     console.log(activityId);
 
     Meteor.call('activities.findone', activityId, (err, activity) => {
@@ -41,7 +32,7 @@ class ActivityDetail extends Component {
       });
     });
 
-    
+
   }
 
 
@@ -68,7 +59,7 @@ class ActivityDetail extends Component {
     this.setState({
       showParticipants: !show,
     });
-    
+
   }
 
   renderParticipantsList() {
@@ -77,14 +68,38 @@ class ActivityDetail extends Component {
     ));
   }
 
+  renderTwits(){
+    return <a className="twitter-timeline" data-lang="es" data-width="400" data-height="300" data-theme="light"
+       data-link-color="#7E85D6" href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National
+      Park Tweets - Curated tweets by TwitterDev</a>
+      < a
+    className = "twitter-timeline"
+    data - lang = "es"
+    data - width = "250"
+    data - height = "300"
+    data - link - color = "#981CEB"
+    href = "https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw" > National
+    Park
+    Tweets - Curated
+    tweets
+    by
+    TwitterDev < /a> <script async src="https:/
+    /platform.twitter.com/
+    widgets.js
+    " charSet="
+    utf - 8
+    "></script>
+  }
+
   render() {
     let currentActivity = this.state.currentActivity;
     let currentUser = Meteor.user();
     let participate = false;
     let isParticipant = false;
-    if(currentUser === null){
+    if (currentUser === null) {
       return <Redirect to="/"/>;
     }
+
 
     if(currentActivity.participants !== undefined && currentUser !== undefined){
       if(currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0){
@@ -116,63 +131,81 @@ class ActivityDetail extends Component {
       );
 
     }
-    
+
 
     return (
       <div>
         <Navbar/>
         <br/>
-        <div className="container detailContainer col-md-6">
-          <h3>{currentActivity.title}</h3>
-          <br/>
-          <p>{'Lugar: ' + currentActivity.place}</p>
-          <p>{'Fecha: ' + currentActivity.date}</p>
-          <p>{'Hora: ' + currentActivity.initTime + ' - ' + currentActivity.finishTime}</p>
-          <p>{'Capacidad: ' + currentActivity.capacity}</p>
-          <p>{'Precio: ' + currentActivity.price}</p>
-          <br/>
-          {
-            currentUser !== undefined && currentUser.username === currentActivity.username ? <button id="btnBorrar" className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
-              Borrar
-            </button> : ''
-            
-          }
-          {
-            !participate ? <button id="btnParticipar" className="participate btn btn-primary" onClick={this.participateInActivity.bind(this)}>
-              Participar
-            </button> : ''
-          }
-          
-          {
-            currentUser !== undefined && currentUser.username === currentActivity.username ? <button id="btnListaParticipantes" className="userlist btn btn-success" onClick={this.showActivityParticipants.bind(this)}>
-              Lista Participantes
-            </button> : ''
-          }
+        <div className="container col-md-6" id="detailContainer">
+          <div id="titulo-detail">
+            <h3 id="titulo">{currentActivity.title}</h3>
+          </div>
+          <div className="row" id="ambas-partes">
+            <div id="detail-descripcion" className="col-6">
+              <div className="row">
+                <p className="label-info">Lugar:</p>
+                <p className="texto-info">{currentActivity.place}</p>
+              </div>
+              <div className="row">
+                <p className="label-info">Fecha:</p>
+                <p className="texto-info">{currentActivity.date}</p>
+              </div>
+              <div className="row">
+                <p className="label-info">Hora:</p>
+                <p className="texto-info">{currentActivity.initTime + ' - ' + currentActivity.finishTime}</p>
+              </div>
+              <div className="row">
+                <p className="label-info">Capacidad:</p>
+                <p className="texto-info">{currentActivity.capacity}</p>
+              </div>
+              <div className="row">
+                <p className="label-info">Precio:</p>
+                <p className="texto-info">{currentActivity.price}</p>
+              </div>
+              <br/>
+              {
+                currentUser !== undefined && currentUser.username === currentActivity.username ?
+                  <button id="btnBorrar" className="delete btn btn-danger" onClick={this.deleteThisActivity.bind(this)}>
+                    Borrar
+                  </button> : ''
 
-          {
-            isParticipant ? 
-              <div className="alert alert-primary" role="alert">
-                Ya estás inscrito a esta actividad.
-              </div> : ''
-          }
-          <br/>
-          <br/>
+              }
+              {
+                !isParticipant ? <button id="btnParticipar" className="participate btn btn-primary"
+                                         onClick={this.participateInActivity.bind(this)}>
+                  Participar
+                </button> : ''
+              }
 
-          {
-            this.state.showParticipants ? 
-              <div>
-                <h4>Lista Participantes: </h4>
-                <ul>
-                  {this.renderParticipantsList()}
-                </ul>
-              </div> : ''
-          }
+              {
+                currentUser !== undefined && currentUser.username === currentActivity.username ?
+                  <button id="btnListaParticipantes" className="userlist btn btn-success"
+                          onClick={this.showActivityParticipants.bind(this)}>
+                    Lista Participantes
+                  </button> : ''
+              }
+              <br/>
+              <br/>
 
+              {
+                this.state.showParticipants ?
+                  <div>
+                    <h4>Lista Participantes: </h4>
+                    <ul>
+                      {this.renderParticipantsList()}
+                    </ul>
+                  </div> : ''
+              }
+            </div>
+            <div className="col-6">
+              <p className="label-info" id="twits">Twits</p>
+              <div id="container-twits">
+                {this.renderTwits()}
+              </div>
+            </div>
+          </div>
         </div>
-
-        
-        
-        
       </div>
     );
   }
