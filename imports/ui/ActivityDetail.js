@@ -94,13 +94,21 @@ class ActivityDetail extends Component {
   render() {
     let currentActivity = this.state.currentActivity;
     let currentUser = Meteor.user();
+    let participate = false;
     let isParticipant = false;
     if (currentUser === null) {
       return <Redirect to="/"/>;
     }
 
-    if (currentActivity.participants !== undefined && currentUser !== undefined) {
-      if (currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0) {
+
+    if(currentActivity.participants !== undefined && currentUser !== undefined){
+      if(currentActivity.participants.includes(currentUser.username) || currentActivity.capacity === 0){
+        participate = true;
+      }
+    }
+
+    if(currentActivity.participants !== undefined && currentUser !== undefined){
+      if(currentActivity.participants.includes(currentUser.username)){
         isParticipant = true;
       }
     }
